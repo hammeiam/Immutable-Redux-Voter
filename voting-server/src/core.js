@@ -1,5 +1,7 @@
 import {List, Map} from 'immutable';
 
+let roundCounter = 0;
+
 export function setEntries(state, entries) {
   return state.set('entries', List(entries));
 }
@@ -22,6 +24,7 @@ export function next(state) {
                 .remove('entries')
                 .set('winner', entries.first());
   } else {
+    roundCounter++;
     return state.merge({
       vote: Map({pair: entries.take(2)}),
       entries: entries.skip(2)
